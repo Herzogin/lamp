@@ -8,7 +8,7 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements LampInt
 	
 	boolean status = false;
 	
-	protected Lamp() throws RemoteException {
+	public Lamp() throws RemoteException {
 		super();
 	}
 
