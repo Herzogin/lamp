@@ -2,9 +2,9 @@ package lamp;
 
 import java.rmi.RemoteException;
 
-import lampButtonServer.LampInterface;
+import buttonLampInterfaces.LampInterface;
 
-public class Lamp extends java.rmi.server.UnicastRemoteObject implements LampInterface  {
+public class Lamp extends java.rmi.server.UnicastRemoteObject implements buttonLampInterfaces.LampInterface  {
 	
 	boolean status = false;
 	
