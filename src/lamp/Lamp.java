@@ -2,7 +2,10 @@ package lamp;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import buttonLampInterfaces.LampInterface;
 
@@ -10,8 +13,10 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 	
 	boolean status = false;
 	LampUI lUi;
-	public Lamp() throws RemoteException {
+	public Lamp() throws RemoteException, AlreadyBoundException {
 		super();
+		Registry registry = LocateRegistry.getRegistry(3000);
+		registry.bind("lamp", this);
 		lUi= new LampUI();
 	}
 
@@ -36,5 +41,12 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public static void main( String[] args ) throws RemoteException, AlreadyBoundException
+	  {
+		new Lamp();
+	  }
+
+
 
 }
