@@ -19,12 +19,13 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 	@Override
 	public void changeStatus() throws RemoteException {
 		if (status) {
+			lUi.changeColor(status);
 			status = false;
-			lUi.changeColor();
+			
 		}
-		else {
+		else {		
+			lUi.changeColor(status);
 			status = true;
-			lUi.changeColor();
 		}
 		System.out.println("Lamp is on: " + status);
 	}

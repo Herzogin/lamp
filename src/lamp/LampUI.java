@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class LampUI implements ActionListener{
+public class LampUI {
 	JPanel p;
-	Boolean onOff = false;
+	
 	
 	public LampUI(){
 		
@@ -25,13 +25,11 @@ public class LampUI implements ActionListener{
 	}
 	
 
-	public void changeColor(){
-		 if (onOff) {
+	public void changeColor(Boolean status){
+		 if (status) {
 			p.setBackground(Color.black);
-			onOff = false;
 		}else {
 			p.setBackground(Color.yellow);
-			onOff = true; 
 		}
 	}
 	
@@ -42,11 +40,7 @@ public class LampUI implements ActionListener{
 	  }*/
 
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		this.changeColor();
-		
-	}
+	
 
 
 
