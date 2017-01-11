@@ -7,8 +7,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import buttonLampInterfaces.LampInterface;
-
 public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionListener, buttonLampInterfaces.LampInterface  {
 	
 	boolean status = false;
@@ -19,7 +17,6 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 		registry.bind("lamp", this);
 		lUi= new LampUI();
 	}
-
 
 	@Override
 	public void changeStatus() throws RemoteException {
@@ -35,18 +32,12 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 		System.out.println("Lamp is on: " + status);
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 	
-	public static void main( String[] args ) throws RemoteException, AlreadyBoundException
-	  {
+	public static void main(String[] args) throws RemoteException, AlreadyBoundException {
 		new Lamp();
-	  }
-
-
-
+	}
 }
