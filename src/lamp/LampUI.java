@@ -16,10 +16,11 @@ public class LampUI {
 		
 	    JFrame f = new JFrame( "Lampe" );
 	    f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-	    f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+	    //f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	    //f.add( new JLabel( String.format( "%tT", new Date() ) ) );
-	     p = new JPanel();
+	    p = new JPanel();
 	    p.setBackground(Color.BLACK);
+	    f.setSize(600, 600);
 	    f.add(p);
 	    f.setVisible( true );
 	}
