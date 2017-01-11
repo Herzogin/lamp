@@ -14,7 +14,9 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 	public Lamp() throws RemoteException, AlreadyBoundException {
 		super();
 		Registry registry = LocateRegistry.getRegistry(3000);
-		registry.bind("lamp", this);
+		
+		// TODO: bind to lamp/hostname/uID, we use currentTime as uID for developing locally
+		registry.bind("lamp-" + System.currentTimeMillis(), this);
 		lUi= new LampUI();
 	}
 
