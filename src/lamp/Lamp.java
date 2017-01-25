@@ -9,23 +9,19 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 
 import org.htw.fiw.vs.IBinder;
 
-public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionListener, buttonLampInterfaces.LampInterface  {
+public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionListener, org.htw.fiw.vs.team1.LampInterface  {
 	
 	boolean status = false;
 	LampUI lUi;
 	public Lamp() throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
 		super();
-		IBinder registry = (IBinder) Naming.lookup("rmi://141.45.210.50/binder");
-		
+		IBinder registry = (IBinder) Naming.lookup("rmi://141.45.209.97/binder");
 		
 		registry.bind("lamp" +"/"+InetAddress.getLocalHost().getHostName()+"/"+ System.currentTimeMillis(), this);
 		lUi= new LampUI();
-		
 	}
 
 	@Override
