@@ -18,7 +18,7 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 	LampUI lUi;
 	public Lamp() throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
 		super();
-		IBinder registry = (IBinder) Naming.lookup("rmi://141.45.209.97/binder");
+		IBinder registry = (IBinder) Naming.lookup("rmi://141.45.251.149/binder");
 		
 		registry.bind("lamp" +"/"+InetAddress.getLocalHost().getHostName()+"/"+ System.currentTimeMillis(), this);
 		lUi= new LampUI();
@@ -36,6 +36,14 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 			status = true;
 		}
 		System.out.println("Lamp is on: " + status);
+	}
+	
+	@Override
+	public void turnOff() throws RemoteException {
+		//true because there is a bug in UI, sorry af
+		this.status = true;
+		lUi.changeColor(this.status);
+		System.out.println("Lamp turned off");
 	}
 
 	@Override
