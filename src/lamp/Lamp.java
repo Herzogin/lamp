@@ -16,11 +16,14 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 	
 	boolean status = false;
 	LampUI lUi;
+	IBinder registry;
+	String name;
+	
 	public Lamp() throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
 		super();
-		IBinder registry = (IBinder) Naming.lookup("rmi://141.45.251.149/binder");
-		
-		registry.bind("lamp" +"/"+InetAddress.getLocalHost().getHostName()+"/"+ System.currentTimeMillis(), this);
+		this.registry = (IBinder) Naming.lookup("rmi://localhost/binder");
+		this.name = "lamp" +"-"+InetAddress.getLocalHost().getHostName()+"-"+ System.currentTimeMillis();
+		this.registry.bind(name, this);
 		lUi= new LampUI();
 	}
 
@@ -50,8 +53,20 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 	}
+
 	
 	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
-		new Lamp();
+		Lamp l = new Lamp();
+		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				try {
+					l.registry.unbind(l.name);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
