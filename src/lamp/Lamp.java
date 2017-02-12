@@ -19,9 +19,9 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 	IBinder registry;
 	String name;
 	
-	public Lamp() throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
+	public Lamp(String ip) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
 		super();
-		this.registry = (IBinder) Naming.lookup("rmi://localhost/binder");
+		this.registry = (IBinder) Naming.lookup("rmi://"+ip+"/binder");
 		this.name = "lamp" +"-"+InetAddress.getLocalHost().getHostName()+"-"+ System.currentTimeMillis();
 		this.registry.bind(name, this);
 		lUi= new LampUI();
@@ -56,7 +56,14 @@ public class Lamp extends java.rmi.server.UnicastRemoteObject implements ActionL
 
 	
 	public static void main(String[] args) throws RemoteException, AlreadyBoundException, UnknownHostException, MalformedURLException, NotBoundException {
-		Lamp l = new Lamp();
+		
+		//IP wird beim Starten der JAR-File übergeben:
+		String ip = args[0];
+				
+		//wenn man es aus Eclipse heraus laufen lassen möchte bitte stattdessen:
+		//String ip = "141.45.203.230";
+		
+		Lamp l = new Lamp(ip);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
